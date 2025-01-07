@@ -1,0 +1,14 @@
+{
+  "name": "serial-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Humberto Galdino",
+  "license": "ISC",
+  "description": "Serial API desenvolvida em Node.js, Express.js e MongoDB",
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
