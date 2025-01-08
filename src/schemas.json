@@ -1,0 +1,284 @@
+{
+    "User": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "email": {
+                "type": "string"
+            },
+            "name": {
+                "type": "string"
+            },
+            "username": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "imgProfile": {
+                "type": "string",
+                "nullable": true
+            },
+            "imgBackground": {
+                "type": "string",
+                "nullable": true
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+            }
+        },
+        "required": [
+            "id",
+            "email",
+            "name",
+            "username",
+            "password",
+            "createdAt",
+            "updatedAt"
+        ]
+    },
+    "CastTvShow": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "idTvShow": {
+                "type": "integer"
+            },
+            "originalName": {
+                "type": "string"
+            },
+            "overview": {
+                "type": "string"
+            },
+            "posterPath": {
+                "type": "string"
+            },
+            "firstAirDate": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "isFavorite": {
+                "type": "boolean"
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+            }
+        },
+        "required": [
+            "id",
+            "idTvShow",
+            "originalName",
+            "overview",
+            "posterPath",
+            "firstAirDate",
+            "isFavorite",
+            "createdAt",
+            "updatedAt"
+        ]
+    },
+    "Episode": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "idEpisode": {
+                "type": "integer"
+            },
+            "idTvShow": {
+                "type": "integer"
+            },
+            "season": {
+                "type": "integer"
+            },
+            "episodeNumber": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            },
+            "isNext": {
+                "type": "boolean"
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+            }
+        },
+        "required": [
+            "id",
+            "idEpisode",
+            "idTvShow",
+            "season",
+            "episodeNumber",
+            "name",
+            "isNext",
+            "createdAt",
+            "updatedAt"
+        ]
+    },
+    "Movie": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "idMovie": {
+                "type": "integer"
+            },
+            "originalName": {
+                "type": "string"
+            },
+            "overview": {
+                "type": "string"
+            },
+            "posterPath": {
+                "type": "string"
+            },
+            "firstAirDate": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "isFavorite": {
+                "type": "boolean"
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+            }
+        },
+        "required": [
+            "id",
+            "idMovie",
+            "originalName",
+            "overview",
+            "posterPath",
+            "firstAirDate",
+            "isFavorite",
+            "createdAt",
+            "updatedAt"
+        ]
+    },
+    "Genre": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "idGenre": {
+                "type": "integer"
+            },
+            "name": {
+                "type": "string"
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+            }
+        },
+        "required": [
+            "id",
+            "idGenre",
+            "name",
+            "createdAt",
+            "updatedAt"
+        ]
+    },
+    "Comments": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "idTvShow": {
+                "type": "integer",
+                "nullable": true
+            },
+            "idEpisode": {
+                "type": "integer",
+                "nullable": true
+            },
+            "season": {
+                "type": "integer",
+                "nullable": true
+            },
+            "idMovie": {
+                "type": "integer",
+                "nullable": true
+            },
+            "comment": {
+                "type": "string",
+                "maxLength": 500
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+            }
+        },
+        "required": [
+            "id",
+            "comment",
+            "createdAt",
+            "updatedAt"
+        ]
+    },
+    "Connections": {
+        "type": "object",
+        "properties": {
+            "id": {
+                "type": "integer"
+            },
+            "idUserFollow": {
+                "type": "integer"
+            },
+            "idUserFollowed": {
+                "type": "integer"
+            },
+            "createdAt": {
+                "type": "string",
+                "format": "date-time"
+            },
+            "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+            }
+        },
+        "required": [
+            "id",
+            "idUserFollow",
+            "idUserFollowed",
+            "createdAt",
+            "updatedAt"
+        ]
+    }
+}
