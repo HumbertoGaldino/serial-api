@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int     @id @default(autoincrement())
+  email         String  @unique
+  name          String
+  username      String  @unique
+  password      String
+  imgProfile    String?
+  imgBackground String?
+
+  movies     Movie[]
+  castTvShow CastTvShow[]
+  episodes   Episode[]
+  genres     Genre[]
+  comments   Comments[]
+  following  Connections[] @relation("UserFollow")
+  followers  Connections[] @relation("UserFollowed")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CastTvShow {
+  id           Int       @id @default(autoincrement())
+  idTvShow     Int
+  originalName String
+  overview     String
+  posterPath   String
+  firstAirDate DateTime
+  isFavorite   Boolean
+  episodes     Episode[]
+  genres       Genre[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int?
+}
+
+model Episode {
+  id            Int     @id @default(autoincrement())
+  idEpisode     Int
+  idTvShow      Int
+  season        Int
+  episodeNumber Int
+  name          String
+  isNext        Boolean
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  CastTvShow   CastTvShow? @relation(fields: [castTvShowId], references: [id], onDelete: Cascade)
+  castTvShowId Int?
+
+  User   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int?
+}
+
+model Movie {
+  id           Int      @id @default(autoincrement())
+  idMovie      Int
+  originalName String
+  overview     String
+  posterPath   String
+  firstAirDate DateTime
+  isFavorite   Boolean
+  genres       Genre[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int?
+}
+
+model Genre {
+  id      Int    @id @default(autoincrement())
+  idGenre Int
+  name    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User? @relation(fields: [userId], references: [id])
+  userId Int?
+
+  CastTvShow   CastTvShow? @relation(fields: [castTvShowId], references: [id], onDelete: Cascade)
+  castTvShowId Int?
+
+  Movie   Movie? @relation(fields: [movieId], references: [id], onDelete: Cascade)
+  movieId Int?
+}
+
+model Comments {
+  id        Int    @id @default(autoincrement())
+  idTvShow  Int?
+  idEpisode Int?
+  season    Int?
+  idMovie   Int?
+  comment   String @db.VarChar(500)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User   User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int?
+}
+
+model Connections {
+  id             Int @id @default(autoincrement())
+  idUserFollow   Int
+  idUserFollowed Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  userFollow   User @relation("UserFollow", fields: [idUserFollow], references: [id], onDelete: Cascade)
+  userFollowed User @relation("UserFollowed", fields: [idUserFollowed], references: [id], onDelete: Cascade)
+
+  @@unique([idUserFollow, idUserFollowed])
+}
