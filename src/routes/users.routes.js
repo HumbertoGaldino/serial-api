@@ -1,9 +1,5 @@
 import express from "express";
-import {
-  registerUser,
-  loginUser,
-  listUsers,
-} from "../controllers/userController.js";
+import userController from "../controllers/userController.js";
 
 const router = express.Router();
 
@@ -68,7 +64,7 @@ const router = express.Router();
  *                   type: string
  *                   example: Ocorreu um erro inesperado.
  */
-router.post("/cadastro", registerUser);
+router.post("/cadastro", userController.registerUser);
 
 /**
  * @swagger
@@ -137,7 +133,7 @@ router.post("/cadastro", registerUser);
  *                   type: string
  *                   example: "Erro no servidor, tente novamente."
  */
-router.post("/login", loginUser);
+router.post("/login", userController.loginUser);
 
 /**
  * @swagger
@@ -154,6 +150,154 @@ router.post("/login", loginUser);
  *       500:
  *         description: Erro no servidor.
  */
-router.get("/listar", listUsers);
+router.get("/listar", userController.listUsers);
+
+/**
+ * @swagger
+ * /usuarios/perfil/{id}:
+ *   get:
+ *     tags:
+ *       - User
+ *     description: Retorna o perfil completo de um usuário específico
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do usuário cujo perfil será retornado
+ *     responses:
+ *       200:
+ *         description: Perfil do usuário retornado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 user:
+ *                   type: object
+ *                   description: Informações básicas do usuário
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     name:
+ *                       type: string
+ *                     username:
+ *                       type: string
+ *                     imgProfile:
+ *                       type: string
+ *                     imgBackground:
+ *                       type: string
+ *                 followers:
+ *                   type: integer
+ *                   description: Número de seguidores do usuário
+ *                 following:
+ *                   type: integer
+ *                   description: Número de pessoas que o usuário está seguindo
+ *                 timekeeper:
+ *                   type: object
+ *                   description: Tempo total gasto em episódios assistidos
+ *                   properties:
+ *                     timeMonths:
+ *                       type: integer
+ *                     timeDays:
+ *                       type: integer
+ *                     timeHours:
+ *                       type: integer
+ *                     timeMinutes:
+ *                       type: integer
+ *                 episodes:
+ *                   type: integer
+ *                   description: Número total de episódios assistidos
+ *                 favoritesCast:
+ *                   type: array
+ *                   description: Lista de séries favoritas
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       idTvShow:
+ *                         type: integer
+ *                       originalName:
+ *                         type: string
+ *                       overview:
+ *                         type: string
+ *                 cast:
+ *                   type: array
+ *                   description: Lista de séries assistidas pelo usuário
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       idTvShow:
+ *                         type: integer
+ *                       originalName:
+ *                         type: string
+ *                       overview:
+ *                         type: string
+ *                 genres:
+ *                   type: array
+ *                   description: Gêneros favoritos do usuário
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       name:
+ *                         type: string
+ *       404:
+ *         description: Usuário não encontrado
+ *       500:
+ *         description: Erro no servidor
+ */
+router.get("/perfil/:id", userController.getUserProfile);
+
+/**
+ * @swagger
+ * /usuarios/search:
+ *   get:
+ *     tags:
+ *       - User
+ *     description: Busca usuários pelo nome ou parte do nome
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - in: query
+ *         name: txtBusca
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Termo de busca para encontrar usuários pelo nome
+ *     responses:
+ *       200:
+ *         description: Lista de usuários encontrados com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 users:
+ *                   type: array
+ *                   description: Lista de usuários encontrados
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                         description: ID do usuário
+ *                       name:
+ *                         type: string
+ *                         description: Nome do usuário
+ *                       username:
+ *                         type: string
+ *                         description: Nome de usuário (username)
+ *                       imgProfile:
+ *                         type: string
+ *                         nullable: true
+ *                         description: URL da imagem de perfil do usuário
+ *       400:
+ *         description: Parâmetro de busca é obrigatório
+ *       500:
+ *         description: Erro no servidor
+ */
+router.get("/search", userController.search);
 
 export default router;

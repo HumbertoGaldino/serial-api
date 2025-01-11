@@ -59,6 +59,7 @@ model Episode {
   season        Int
   episodeNumber Int
   name          String
+  runTime       Int
   isNext        Boolean
 
   createdAt DateTime @default(now())
