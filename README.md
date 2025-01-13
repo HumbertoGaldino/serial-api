@@ -51,7 +51,7 @@ Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
 
    ```env
    PORT=3000
-   MONGODB_URI=sua_conexao_mongodb
+   DATABASE_URL=sua_conexao_mongodb
    TMDB_API_KEY=sua_chave_da_api_tmdb
    JWT_SECRET=sua_chave_secreta
    ```
