@@ -146,7 +146,7 @@ const userController = {
     }
   },
 
-  async search(req, res) {
+  async searchUser(req, res) {
     try {
       const searchTerm = req.query.txtBusca;
 

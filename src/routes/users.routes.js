@@ -298,6 +298,6 @@ router.get("/perfil/:id", userController.getUserProfile);
  *       500:
  *         description: Erro no servidor
  */
-router.get("/search", userController.search);
+router.get("/search", userController.searchUser);
 
 export default router;
