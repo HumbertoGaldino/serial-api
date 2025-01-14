@@ -59,7 +59,7 @@ model Episode {
   season        Int
   episodeNumber Int
   name          String
-  runTime       Int
+  runtime       Int
   isNext        Boolean
 
   createdAt DateTime @default(now())
@@ -76,10 +76,11 @@ model Movie {
   id           Int      @id @default(autoincrement())
   idMovie      Int
   originalName String
-  overview     String
+  title        String
   posterPath   String
   firstAirDate DateTime
   isFavorite   Boolean
+  runTime      Int
   genres       Genre[]
 
   createdAt DateTime @default(now())
