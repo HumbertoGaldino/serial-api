@@ -300,8 +300,8 @@ router.get("/profile/:id", userController.getUserProfile);
  */
 router.get("/search", userController.searchUser);
 
-router.delete("/:id/delete", userController.deleteUser);
+router.delete("/:id", userController.deleteUser);
 
-router.patch("/:id/update", userController.updateUser);
+router.patch("/:id", userController.updateUser);
 
 export default router;
