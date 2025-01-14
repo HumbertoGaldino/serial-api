@@ -12,6 +12,7 @@
   "description": "Serial API desenvolvida em Node.js, Express.js e MongoDB",
   "dependencies": {
     "@prisma/client": "^6.2.1",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
