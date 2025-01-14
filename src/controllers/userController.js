@@ -177,6 +177,52 @@ const userController = {
       res.status(500).json({ message: "Erro no servidor. Tente novamente!" });
     }
   },
+
+  async deleteUser(req, res) {
+    try {
+      const id = parseInt(req.params.id);
+
+      const userId = await prisma.user.findUnique({
+        where: { id },
+      });
+
+      const deletedUser = await prisma.user.delete({
+        where: {
+          id: userId.id,
+        },
+      });
+
+      res.status(204).json({ message: "Usuário deletado." });
+    } catch (error) {
+      res.status(500).json({ message: "Erro no servidor, tente novamente" });
+    }
+  },
+
+  async updateUser(req, res) {
+    try {
+      const id = parseInt(req.params.id);
+
+      const newData = req.body;
+
+      const userId = await prisma.user.findUnique({
+        where: { id },
+      });
+
+      const updatedUser = await prisma.user.update({
+        where: {
+          id: userId.id,
+        },
+        data: newData,
+      });
+
+      res.status(200).json({ message: "Usuário atualizado." });
+    } catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+      throw error;
+    } finally {
+      await prisma.$disconnect();
+    }
+  },
 };
 
 export default userController;

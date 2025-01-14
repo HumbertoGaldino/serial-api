@@ -64,6 +64,11 @@ const trailerTvShow = async (id) => {
     const { data: trailer2 } = await api.get(
       `tv/${id}/season/1/videos?api_key=${apiKey}`
     );
+
+    if (trailer2.results.length == 0) {
+      return "Tailer não existe";
+    }
+
     const key2 = trailer2.results[0].key;
     return `https://www.youtube.com/watch?v=${key2}`;
   }
@@ -82,6 +87,11 @@ const trailerMovie = async (id) => {
     const { data: trailer2 } = await api.get(
       `movie/${id}/videos?api_key=${apiKey}`
     );
+
+    if (trailer2.results.length == 0) {
+      return "Tailer não existe";
+    }
+
     const key2 = trailer2.results[0].key;
     return `https://www.youtube.com/watch?v=${key2}`;
   }
