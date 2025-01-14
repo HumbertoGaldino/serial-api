@@ -6,11 +6,17 @@ import schemasSwagger from "./schemas.json" with { type: "json" };
 
 import express from "express";
 import usersRoutes from "./routes/users.routes.js";
+import tvShowRoutes from "./routes/tvshows.routes.js";
+import tmdbRoutes from "./routes/tmdb.routes.js";
+import moviesRoutes from "./routes/movies.routes.js";
 
 const app = express();
 app.use(express.json());
 
-app.use("/usuarios", usersRoutes);
+app.use("/user", usersRoutes);
+app.use("/tvshow", tvShowRoutes)
+app.use("/api", tmdbRoutes)
+app.use("/movies", moviesRoutes);
 
 //Documentação da API
 var swaggerDefinition = {

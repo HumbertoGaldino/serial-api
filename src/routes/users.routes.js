@@ -5,7 +5,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /usuarios/cadastro:
+ * /users/cadastro:
  *   post:
  *     tags:
  *       - User
@@ -64,11 +64,11 @@ const router = express.Router();
  *                   type: string
  *                   example: Ocorreu um erro inesperado.
  */
-router.post("/cadastro", userController.registerUser);
+router.post("/register", userController.registerUser);
 
 /**
  * @swagger
- * /usuarios/login:
+ * /users/login:
  *   post:
  *     tags:
  *       - User
@@ -137,7 +137,7 @@ router.post("/login", userController.loginUser);
 
 /**
  * @swagger
- * /usuarios/listar:
+ * /users/listar:
  *   get:
  *     tags:
  *       - User
@@ -150,11 +150,11 @@ router.post("/login", userController.loginUser);
  *       500:
  *         description: Erro no servidor.
  */
-router.get("/listar", userController.listUsers);
+router.get("/list", userController.listUsers);
 
 /**
  * @swagger
- * /usuarios/perfil/{id}:
+ * /users/perfil/{id}:
  *   get:
  *     tags:
  *       - User
@@ -248,11 +248,11 @@ router.get("/listar", userController.listUsers);
  *       500:
  *         description: Erro no servidor
  */
-router.get("/perfil/:id", userController.getUserProfile);
+router.get("/profile/:id", userController.getUserProfile);
 
 /**
  * @swagger
- * /usuarios/search:
+ * /users/search:
  *   get:
  *     tags:
  *       - User
