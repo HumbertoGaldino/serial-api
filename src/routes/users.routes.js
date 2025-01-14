@@ -302,4 +302,6 @@ router.get("/search", userController.searchUser);
 
 router.delete("/:id/delete", userController.deleteUser);
 
+router.patch("/:id/update", userController.updateUser);
+
 export default router;
