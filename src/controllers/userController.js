@@ -177,6 +177,26 @@ const userController = {
       res.status(500).json({ message: "Erro no servidor. Tente novamente!" });
     }
   },
+
+  async deleteUser(req, res) {
+    try {
+      const id = parseInt(req.params.id);
+
+      const userId = await prisma.user.findUnique({
+        where: { id },
+      });
+
+      const deletedUser = await prisma.user.delete({
+        where: {
+          id: userId.id,
+        },
+      });
+
+      res.status(204).json({ message: "Usuário deletado." });
+    } catch (error) {
+      res.status(500).json({ message: "Erro no servidor, tente novamente" });
+    }
+  },
 };
 
 export default userController;
