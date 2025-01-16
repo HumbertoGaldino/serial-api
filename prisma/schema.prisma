@@ -78,6 +78,7 @@ model Movie {
   originalName String
   title        String
   posterPath   String
+  overview     String
   firstAirDate DateTime
   isFavorite   Boolean
   runTime      Int
