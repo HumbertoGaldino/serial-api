@@ -14,10 +14,12 @@ const movieController = {
       const {
         idMovie,
         originalName,
+        title,
         overview,
         posterPath,
         firstAirDate,
         isFavorite,
+        runTime,
         genres,
       } = req.body;
 
@@ -29,18 +31,23 @@ const movieController = {
           posterPath,
           firstAirDate,
           isFavorite,
-          userId: parseInt(userId),
+          title,
+          runTime,
           genres: {
             create: {
               name: genres.name,
               idGenre: genres.id,
             },
           },
+          userId: parseInt(userId),
         },
       });
       res.status(201).json(movie);
     } catch (error) {
-      res.status(500).json({ error: "Erro ao criar filme" });
+      res.status(500).json({
+        message: "Error creating movie",
+        error: error.message,
+      });
     }
   },
 

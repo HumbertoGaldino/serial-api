@@ -10,7 +10,7 @@ import tvShowRoutes from "./routes/tvshows.routes.js";
 import tmdbRoutes from "./routes/tmdb.routes.js";
 import moviesRoutes from "./routes/movies.routes.js";
 import episodesRoutes from "./routes/episodes.routes.js";
-
+import commentsRoutes from "./routes/comments.routes.js";
 import auth from "./middlewares/auth.js";
 
 const app = express();
@@ -19,8 +19,9 @@ app.use(express.json());
 app.use("/user", usersRoutes);
 app.use("/tvshow", auth, tvShowRoutes);
 app.use("/api", tmdbRoutes)
-app.use("/movies", moviesRoutes);
+app.use("/movies", auth, moviesRoutes);
 app.use("/episodes", auth, episodesRoutes);
+app.use("/comments", commentsRoutes);
 //Documentação da API
 var swaggerDefinition = {
   info: {
