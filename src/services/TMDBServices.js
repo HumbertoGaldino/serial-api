@@ -1,63 +1,63 @@
 import { api, apiKey } from "./api.js";
 
-const findByName = async (query, pageSearch) => {
+const findByName = async (query, pageSearch, lang = "pt-BR") => {
   const {
     data: { page, results, total_pages, total_results },
   } = await api.get(
-    `search/multi?api_key=${apiKey}&query=${query}&page=${pageSearch}&language=pt-Br&include_adult=false`
+    `search/multi?api_key=${apiKey}&query=${query}&page=${pageSearch}&language=${lang}&include_adult=false`
   );
   return { page, results, total_pages, total_results };
 };
 
-const findTvShowByID = async (id) => {
+const findTvShowByID = async (id, lang = "pt-BR") => {
   const { data: serie } = await api.get(
-    `tv/${id}?api_key=${apiKey}&language=pt-BR`
+    `tv/${id}?api_key=${apiKey}&language=${lang}`
   );
   return serie;
 };
 
-const findSeason = async (id, seasonNumber) => {
+const findSeason = async (id, seasonNumber, lang = "pt-BR") => {
   const { data: season } = await api.get(
-    `tv/${id}/season/${seasonNumber}?api_key=${apiKey}&language=pt-BR`
+    `tv/${id}/season/${seasonNumber}?api_key=${apiKey}&language=${lang}`
   );
   return season;
 };
 
-const getEpisode = async (idTvShow, seasonNumber, episodeNumber) => {
+const getEpisode = async (idTvShow, seasonNumber, episodeNumber, lang = "pt-BR") => {
   const { data: episode } = await api.get(
-    `tv/${idTvShow}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}&language=pt-BR`
+    `tv/${idTvShow}/season/${seasonNumber}/episode/${episodeNumber}?api_key=${apiKey}&language=${lang}`
   );
   return episode;
 };
 
-const findMovieByID = async (id) => {
+const findMovieByID = async (id, lang = "pt-BR") => {
   const { data: movie } = await api.get(
-    `movie/${id}?api_key=${apiKey}&language=pt-BR`
+    `movie/${id}?api_key=${apiKey}&language=${lang}`
   );
   return movie;
 };
 
-const discoverMovies = async (pageOfDiscover) => {
+const discoverMovies = async (pageOfDiscover, lang = "pt-BR") => {
   const {
     data: { page, results, total_pages, total_results },
   } = await api.get(
-    `discover/movie?api_key=${apiKey}&language=pt-BR&page=${pageOfDiscover}`
+    `discover/movie?api_key=${apiKey}&language=${lang}&page=${pageOfDiscover}`
   );
   return { page, results, total_pages, total_results };
 };
 
-const discoverTvShow = async (pageOfDiscover) => {
+const discoverTvShow = async (pageOfDiscover, lang = "pt-BR") => {
   const {
     data: { page, results, total_pages, total_results },
   } = await api.get(
-    `discover/tv?api_key=${apiKey}&language=pt-BR&page=${pageOfDiscover}`
+    `discover/tv?api_key=${apiKey}&language=${lang}&page=${pageOfDiscover}`
   );
   return { page, results, total_pages, total_results };
 };
 
-const trailerTvShow = async (id) => {
+const trailerTvShow = async (id, lang = "pt-BR") => {
   const { data: trailer } = await api.get(
-    `tv/${id}/season/1/videos?api_key=${apiKey}&language=pt-BR`
+    `tv/${id}/season/1/videos?api_key=${apiKey}&language=${lang}`
   );
 
   if (trailer.results.length == 0) {
@@ -78,9 +78,9 @@ const trailerTvShow = async (id) => {
   return `https://www.youtube.com/watch?v=${key}`;
 };
 
-const trailerMovie = async (id) => {
+const trailerMovie = async (id, lang = "pt-BR") => {
   const { data: trailer } = await api.get(
-    `movie/${id}/videos?api_key=${apiKey}&language=pt-BR`
+    `movie/${id}/videos?api_key=${apiKey}&language=${lang}`
   );
 
   if (trailer.results.length == 0) {
