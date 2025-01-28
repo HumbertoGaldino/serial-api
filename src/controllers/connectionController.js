@@ -58,7 +58,7 @@ const connectionController = {
     }
   },
 
-  async isFollower(req, res, followId, followedId) {
+  async isFollower(req, res) {
     try {
       const userFollowId = req.userId;
       const userFollowedId = req.params.id;
@@ -73,13 +73,13 @@ const connectionController = {
       });
 
       if (!isConnection) {
-        res.send(404, false);
+        return res.status(404).json({ message: false });
       }
 
-      res.send(200, true);
+      return res.status(200).json({ message: true });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Erro no servidor!" });
+      return res.status(500).json({ message: "Erro no servidor!" });
     }
   },
 

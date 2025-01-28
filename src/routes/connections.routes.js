@@ -7,6 +7,6 @@ router.post("/:id", connectionController.follow);
 router.delete("/:id", connectionController.unfollow);
 router.get("/followers", connectionController.getFollowers);
 router.get("/following", connectionController.getFollowing);
-router.get("/:id/isFollower", connectionController.isFollower);
+router.get("/:id", connectionController.isFollower);
 
 export default router;
