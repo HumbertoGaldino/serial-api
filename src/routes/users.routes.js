@@ -64,7 +64,7 @@ const router = express.Router();
  *                   type: string
  *                   example: Ocorreu um erro inesperado.
  */
-router.post("/register", userController.registerUser);
+router.post("/register", userController.validateJWTToken);
 
 /**
  * @swagger
@@ -178,7 +178,7 @@ router.post("/login", userController.loginUser);
  *                   type: string
  *                   example: "Erro no servidor, tente novamente."
  */
-router.post("/validate", userController.validateUser);
+router.post("/validate", userController.validateJWTToken);
 
 /**
  * @swagger
