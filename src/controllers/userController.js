@@ -74,12 +74,30 @@ const userController = {
           imgBackground: user.imgBackground,
         },
         JWT_SECRET,
-        { expiresIn: "1d" }
+        { expiresIn: "1d" },
       );
 
       res.status(200).json(token);
     } catch (error) {
       res.status(500).json({ message: "Erro no servidor, tente novamente" });
+    }
+  },
+
+  async validateJWTToken(req, res) {
+    try {
+      const { token } = req.body;
+
+      if (!token) {
+        return res.status(400).json({ message: "Token obrigatório!" });
+      }
+
+      const decoded = jwt.verify(token, JWT_SECRET);
+
+      res
+        .status(200)
+        .json({ message: "Usuário validado com sucesso!", decoded });
+    } catch (error) {
+      res.status(401).json({ message: "Token inválido!" });
     }
   },
 

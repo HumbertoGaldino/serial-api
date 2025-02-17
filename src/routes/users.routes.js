@@ -137,6 +137,51 @@ router.post("/login", userController.loginUser);
 
 /**
  * @swagger
+ * /user/validate:
+ *   post:
+ *     tags:
+ *       - User
+ *     description: Validação de usuário
+ *     produces:
+ *       - application/json
+ *     responses:
+ *       200:
+ *         description: Usuário validado com sucesso
+ *       401:
+ *         description: Token inválido
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Token inválido!"
+ *       404:
+ *         description: Usuário não encontrado!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Usuário não encontrado!"
+ *       500:
+ *         description: Erro no servidor, tente novamente
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Erro no servidor, tente novamente."
+ */
+router.post("/validate", userController.validateUser);
+
+/**
+ * @swagger
  * /users/listar:
  *   get:
  *     tags:
