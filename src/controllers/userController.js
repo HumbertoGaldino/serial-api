@@ -124,7 +124,16 @@ const userController = {
 
       const userProfile = await prisma.user.findUnique({
         where: { id: userId },
-        include: {
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          lastname: true,
+          username: true,
+          imgProfile: true,
+          imgBackground: true,
+          createdAt: true,
+          updatedAt: true,
           movies: {
             take: limitMovies,
           },
@@ -149,18 +158,18 @@ const userController = {
 
       const totalRunTime = await prisma.episode.aggregate({
         _sum: {
-          runTime: true,
+          runtime: true,
         },
       });
 
-      const total = totalRunTime._sum.runTime || 0;
+      const total = totalRunTime._sum.runtime || 0;
 
       userProfile.totalRunTime = total;
 
       res.json(userProfile); // Retorna os dados do perfil do usuário
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: "Erro no servidor, tente novamente!" });
+      res.status(500).json({ message: error.message || "Erro no servidor, tente novamente!" });
     }
   },
 
