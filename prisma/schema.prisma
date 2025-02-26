@@ -42,7 +42,8 @@ model CastTvShow {
   overview     String
   posterPath   String
   firstAirDate DateTime
-  isFavorite   Boolean
+  isFavorite   Boolean   @default(false)
+  isWishList   Boolean   @default(false)
   episodes     Episode[]
   genres       Genre[]
 
@@ -81,7 +82,8 @@ model Movie {
   posterPath   String
   overview     String
   firstAirDate DateTime
-  isFavorite   Boolean
+  isFavorite   Boolean  @default(false)
+  isWishList   Boolean  @default(false)
   runTime      Int
   genres       Genre[]
 
