@@ -34,10 +34,10 @@ const movieController = {
           title,
           runTime,
           genres: {
-            create: {
-              name: genres.name,
-              idGenre: genres.id,
-            },
+            create: genres.map((genre) => ({
+              name: genre.name,
+              idGenre: genre.id,
+            })),
           },
           userId: parseInt(userId),
         },

@@ -29,10 +29,10 @@ const tvShowController = {
           firstAirDate,
           isFavorite,
           genres: {
-            create: {
-              name: genres.name,
-              idGenre: genres.id,
-            },
+            create: genres.map(genre => ({
+                name: genre.name,
+                idGenre: genre.id,
+            })),
           },
           userId: parseInt(userId),
         },
