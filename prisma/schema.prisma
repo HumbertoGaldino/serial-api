@@ -38,6 +38,7 @@ model User {
 model CastTvShow {
   id           Int       @id @default(autoincrement())
   idTvShow     Int
+  name         String    @default("")
   originalName String
   overview     String
   posterPath   String
