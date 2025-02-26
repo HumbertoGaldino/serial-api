@@ -12,6 +12,7 @@ const tvShowController = {
 
       const {
         idTvShow,
+        name,
         originalName,
         overview,
         posterPath,
@@ -23,6 +24,7 @@ const tvShowController = {
       const tvshow = await prisma.castTvShow.create({
         data: {
           idTvShow,
+          name,
           originalName,
           overview,
           posterPath,
