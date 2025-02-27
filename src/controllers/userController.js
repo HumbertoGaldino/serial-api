@@ -62,7 +62,9 @@ const userController = {
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(400).json({ message: "Senha inválida!" });
+        return res
+          .status(400)
+          .json({ message: "E-mail e/ou senha inválidos!" });
       }
 
       const token = jwt.sign(
@@ -74,7 +76,7 @@ const userController = {
           imgBackground: user.imgBackground,
         },
         JWT_SECRET,
-        { expiresIn: "1d" },
+        { expiresIn: "1d" }
       );
 
       res.status(200).json(token);
@@ -169,7 +171,11 @@ const userController = {
       res.json(userProfile); // Retorna os dados do perfil do usuário
     } catch (error) {
       console.error(error);
-      res.status(500).json({ message: error.message || "Erro no servidor, tente novamente!" });
+      res
+        .status(500)
+        .json({
+          message: error.message || "Erro no servidor, tente novamente!",
+        });
     }
   },
 
