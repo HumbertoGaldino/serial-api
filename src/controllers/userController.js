@@ -158,15 +158,21 @@ const userController = {
 
       userProfile.episodesCount = episodesCount;
 
-      const totalRunTime = await prisma.episode.aggregate({
+      const moviesRunTime = await prisma.movie.aggregate({
+        _sum: {
+          runTime: true,
+        },
+      });
+
+      const episodesRunTime = await prisma.episode.aggregate({
         _sum: {
           runtime: true,
         },
       });
 
-      const total = totalRunTime._sum.runtime || 0;
+      const totalRunTime = moviesRunTime._sum.runTime + episodesRunTime._sum.runtime;
 
-      userProfile.totalRunTime = total;
+      userProfile.totalRunTime = totalRunTime;
 
       res.json(userProfile); // Retorna os dados do perfil do usuário
     } catch (error) {
